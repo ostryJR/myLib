@@ -1,0 +1,29 @@
+# Name: myLib
+# Version: 0.2.0
+# Last Update: 2021.12.27 01:07UTC
+# Creator: Mikpos(Mikolaj Ostrowski)
+# Mail: mikolaj.p.ostrowski@gmail.com
+# GitHub:
+# License: Freeware
+#
+# This is library with useful functions:
+#     NF-Not finished
+#     Features:
+#       COLORS:
+#             colors are stored in consts.py
+#       NORMAL:
+#       info(): return name and version
+#             param1: if there is 'ver', will return only number of version
+#       numberInfo(): return info about given number
+#             param1: number
+#             param2:
+#                   '+' will return +,0,-,
+#                   'b' will return true, if number is a number
+#       PYGAME:
+#       NF pginit(): Inicialize pygame packets
+#       NF windowCreate(): create window
+#             param1: name
+#             param2: width
+#             param3: height
+#             param4: caption
+#       exitPg(): check if keys to exit pygame window is clicked and exit programm
