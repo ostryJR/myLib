@@ -1,20 +1,58 @@
 # Name: myLib
-# Version: 0.1.3
+# Version: 0.2.0
 # Last Update: 2021.12.27 01:07UTC
 # Creator: Mikpos(Mikolaj Ostrowski)
 # Mail: mikolaj.p.ostrowski@gmail.com
 # GitHub:
 # License: Freeware
-
+#
+# This is library with useful functions:
+#     NF-Not finished
+#     Features:
+#       COLORS:
+#             colors are stored in consts.py
+#             colors of console
+#       NORMAL:
+#       info(): return name and version
+#             param1: if there is 'ver', will return only number of version
+#       numberInfo(): return info about given number
+#             param1: number
+#             param2:
+#                   '+' will return +,0,-,
+#                   'b' will return true, if number is a number
+#       startLogging():
+#           param1: 0 or 1, 0 if you like to append data, 1 if you like to save in clear file or create this file
+#           param2: name and directory of file
+#       stopLogging(): closing file to save logs
+#       loggingConfiguration(): configure logging settings(time format)
+#       log():
+#           param1: data to print in console and in log file
+#
+#       export():
+#           param1: data to save
+#           param2: 0 or 1, 0 if you like to append data, 1 if you like to save in clear file or create this file
+#           param3: name and directory of file
+#
+#
+#
+#       PYGAME:
+#       NF pginit(): Inicialize pygame packets
+#       NF windowCreate(): create window
+#             param1: name
+#             param2: width
+#             param3: height
+#             param4: caption
+#       exitPg(): check if keys to exit pygame window is clicked and exit programm
 
 # import pygame as pg
 import sys
 import math as mt
 import consts as cs
 import time as tm
+import logging
 
 
-ver = "0.2.0"
+ver = "0.3.0"
 
 
 # def init():
@@ -26,6 +64,33 @@ def info(verParam):
     else:
         print(f'myLib {ver}')
 
+def startLogging(resetFile=0, fileName="log.txt"):
+    global fileLog
+    if resetFile == 1:
+        fileLog = open(fileName, "w")
+        fileLog.close()
+    fileLog = open(fileName, "a")
+
+def stopLogging():
+    fileLog.close()
+
+def loggingConfiguration():
+    format = "%(asctime)s: %(message)s"
+    logging.basicConfig(format=format, level=logging.INFO, datefmt="%H:%M:%S")
+
+def log(infoArg):
+    #if fileLog.closed == True: NOT WORKING!!!
+        #startLogging()
+    logging.info(f'{cs.bcolors.OKGREEN}{infoArg}{cs.bcolors.ENDC}')
+    fileLog.write(f'{tm.ctime()[11:19]}: {infoArg}\n')
+
+def exportData(data, resetFile=0, fileName="exportedData.txt"):
+    if resetFile == 1:
+        fileExport = open(fileName, "w")
+    else:
+        fileExport = open(fileName, "a")
+    fileExport.write(str(data))
+    fileExport.close()
 
 def numberInfo(number, param1):
     if param1 == 'b':
@@ -44,7 +109,6 @@ def numberInfo(number, param1):
             return '-'
     else:
         return '01 Error: Not a number'
-
 
 # def pginit():
 #     pg.init()
@@ -108,6 +172,8 @@ def pointCalc(x, y, ang, dist):
         x_end = x - mt.sin(mt.radians(ang)) * dist
         y_end = y + mt.cos(mt.radians(ang)) * dist
     return x_end, y_end
+#angle = input(f'podaj kat: ')
+#print(pointCalc(0, 0, int(angle), 10))
 
 def execTime(arg1):
     start = 0
@@ -118,9 +184,6 @@ def execTime(arg1):
 
     return str(returnedValue), stop-start
 
-
-angle = input(f'podaj kat: ')
-print(pointCalc(0, 0, int(angle), 10))
 
 
 
