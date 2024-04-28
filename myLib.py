@@ -1,3 +1,6 @@
+#DEPRECATED
+
+
 # Name: myLib
 # Version: 0.2.0
 # Last Update: 2021.12.27 01:07UTC
